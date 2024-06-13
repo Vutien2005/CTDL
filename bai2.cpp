@@ -17,4 +17,5 @@ int main(){
    cout<<"Nhap nam sinh:";
    cin>>sv1.Namsinh;
    cout<<sv1.Masv<<"\t"<<sv1.Tensv<<"\t"<<sv1.Namsinh<<"\n";
+   cout<<"hello";
 }
