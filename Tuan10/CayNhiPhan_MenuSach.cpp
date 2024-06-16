@@ -106,13 +106,18 @@ int DemSoLuongSach(Tree T) {
         return 0;
 }
 
-// Đếm và trả về số nút lá hay còn gọi là sách dưới đáy
-int DemLa(Tree T) {
+// Dem so sach duoi so tien la 5000 dong
+int DemSach(Tree T, int price  ) {
+    
     if (T != NULL) { // Cây không rỗng
-        if (T->Left == NULL && T->Right == NULL)
-            return 1;
-        else
-            return DemLa(T->Left) + DemLa(T->Right);
+     if(T->Key.GiaSach <= price){
+        return 1 + DemSach(T->Left, price) + DemSach(T->Right, price);
+     }
+     else if (T->Key.GiaSach > price)
+     {
+       DemSach(T->Right, price); 
+       DemSach(T->Left, price); 
+     }      
     } else // Cây rỗng
         return 0;
 }
@@ -231,7 +236,7 @@ void Menu(Tree T) {
         cout << "8. Tong gia tri sach trong cay\n";
         cout << "9. Dem so luong sach trong cay\n";
         cout << "10. Trung binh gia cua moi cuon sach\n";
-        cout << "11. Dem so sach duoi day cay\n";
+        cout << "11. Dem so sach duoi so tien la 5000 dong\n";
         cout << "12. Tim sach theo ten tac gia\n";
         cout << "13. Tim tac gia theo ten sach\n";
         cout << "14. Tim sach theo gia tri sach\n";
@@ -291,8 +296,10 @@ void Menu(Tree T) {
             case 10: // Trung bình giá của 1 cuốn sách
                 cout << "Trung binh gia cua 1 cuon sach la:" << (float)TongGiaTriSach(T) / DemSoLuongSach(T) << endl;
                 break;
-            case 11: // Đếm số sách dưới đáy cây
-                cout << "So sach duoi day cay la:" << DemLa(T) << endl;
+            case 11: // Đếm số sách dưới 5000 dong
+                int price ;
+                price =5000;
+                cout << "So sach duoi 5000  la:" << DemSach(T, price)<< endl;
                 break;
             case 12: // Sử dụng hàm tìm sách theo tên tác giả để tìm sách
                 {
